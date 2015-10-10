@@ -111,7 +111,7 @@ app.post('/register',function(req, res){
             email.setSubject("Knowledge is valuable");
             email.setHtml("We are glad to have you on board");
 
-            sendgrid.send(email);
+            //sendgrid.send(email);
             console.log("email sent");
             console.log("Added user");
                 res.redirect('/');
