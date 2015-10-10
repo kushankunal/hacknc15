@@ -1,5 +1,5 @@
 /**
- * Created by Shivaji on 4/18/2015.
+ * Created by Shivaji, Arjun and Kunal on 10/10/2015.
  */
 var bodyParser = require('body-parser');
 var express = require('express');
@@ -18,6 +18,16 @@ var User = mongoose.model('User', new Schema({
     password: String,
     aboutMe: String
 }));
+
+var Event = mongoose.model('Event', new Schema({
+	id: ObjectId,
+	name: String,
+	location: String,
+	teamSize: String,
+	date: Date
+}));
+
+
 
 app.engine('html', require('ejs').renderFile);
 //Middleware
@@ -38,6 +48,12 @@ app.get('/register',function(req, res){
     console.log("entered register")
 });
 
+app.get('/createEvent',function(req, res){
+    res.render('createEvent.html');
+    console.log("entered register")
+});
+
+
 app.get('/dashboard',function(req,res){
    if(req.session && req.session.user){
        User.findOne({email: req.session.user.email}, function(err, user){
@@ -47,7 +63,7 @@ app.get('/dashboard',function(req,res){
            }
            else {
                res.locals.user = user;
-               res.render('dashboard.jade')
+               res.render('index.html')
            }
 
        })
