@@ -48,6 +48,12 @@ app.get('/register',function(req, res){
     console.log("entered register")
 });
 
+app.get('/createEvent',function(req, res){
+    res.render('createEvent.html');
+    console.log("entered register")
+});
+
+
 app.get('/dashboard',function(req,res){
    if(req.session && req.session.user){
        User.findOne({email: req.session.user.email}, function(err, user){
