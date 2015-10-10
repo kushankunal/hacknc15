@@ -47,7 +47,7 @@ app.get('/dashboard',function(req,res){
            }
            else {
                res.locals.user = user;
-               res.render('dashboard.jade')
+               res.render('index.html')
            }
 
        })
