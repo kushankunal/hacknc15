@@ -8,7 +8,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var ObjectId = Schema.ObjectId;
 var session = require('client-sessions');
-mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/newauth');
+mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/teamup');
 
 var User = mongoose.model('User', new Schema({
     id: ObjectId,
@@ -111,7 +111,7 @@ app.post('/register',function(req, res){
             email.setSubject("Knowledge is valuable");
             email.setHtml("We are glad to have you on board");
 
-            sendgrid.send(email);
+            //sendgrid.send(email);
             console.log("email sent");
             console.log("Added user");
                 res.redirect('/');
