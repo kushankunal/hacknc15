@@ -19,6 +19,16 @@ var User = mongoose.model('User', new Schema({
     aboutMe: String
 }));
 
+var Event = mongoose.model('Event', new Schema({
+	id: ObjectId,
+	name: String,
+	location: String,
+	teamSize: String,
+	date: Date
+}));
+
+
+
 app.engine('html', require('ejs').renderFile);
 //Middleware
 app.set('view engine','jade');
