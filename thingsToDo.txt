@@ -1,0 +1,10 @@
+What happends once you click on match against a user
+Setting up mongo
+store data in DB
+
+Pages
+Home page
+Create Event form
+Signup form
+list people going for the event
+
