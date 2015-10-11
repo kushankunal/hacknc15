@@ -112,27 +112,34 @@ app.get('/dashboard',function(req,res){
 
 })
 
-app.post('/login',function(req,res){
-    console.log("Entered login post");
-    User.findOne({email: req.body.username}, function(err, user){
-        console.log("findOne callback");
-        if(!user){
-            console.log("No user");
-            res.render('signin.jade',{error: "Invalid username or password"});
-        }
-        else{
-            console.log("In else");
-            if(req.body.password === user.password){
-                console.log("Passwords match");
-                req.session.user = user;
-                res.redirect('/dashboard');
-            }
-            else {
-                console.log("Incorrect password");
-                res.render('signin.jade',{error: "Incorrect password"});
-            }
-        }
-    })
+app.get('/login',function(req,res){
+    console.log("Entered login get"+ req.body.username);
+	if(req.body.username){
+		
+		User.findOne({email: req.body.username}, function(err, user){
+			console.log("findOne callback"+ user);
+			if(!user){
+				console.log("No user");
+				res.render('signin.jade',{error: "Invalid username or password"});
+			}
+			else{
+				console.log("In else");
+				if(req.body.password === user.password){
+					console.log("Passwords match");
+					req.session.user = user;
+					res.redirect('/dashboard');
+				}
+				else {
+					console.log("Incorrect password");
+					res.render('signin.jade',{error: "Incorrect password"});
+				}
+			}
+		})
+	}
+	else{
+		console.log("Direct Access");
+		res.render('signin.jade',{error: "You need to login!"});
+	}
 });
 
 app.post('/register',function(req, res){

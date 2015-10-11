@@ -14,7 +14,8 @@ html
     .eventlist
         ul
           each val in events
-            li #{val.name}
+            li 
+              a(href="/eventDetails?eventId=#{val._id}") #{val.name}
 
     // Button
     .col-md-offset-3.col-md-9
