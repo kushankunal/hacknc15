@@ -53,7 +53,30 @@ app.get('/register',function(req, res){
     console.log("entered register")
 });
 
-app.get('/createEvent',function(req, res){
+
+app.post('/createEvent',function(req, res){
+    var event = new User({
+        name: req.body.name,
+        location : req.body.location,
+        teamSize : req.body.teamSize,
+        date : req.body.date
+    });
+    event.save(function (err, events) {
+        if(err) {
+            console.log("error", err);
+            res.redirect('createEventForm');
+        }
+        else {
+            consloe.log("Saved!");
+            Event.find({}, function (err, events) {
+                res.locals.user = user;
+                res.render('index.jade', { events : events });    
+            });  
+        }
+    });
+});
+
+app.get('/createEventForm',function(req, res){
     res.render('createEvent.html');
     console.log("entered register")
 });
@@ -67,8 +90,16 @@ app.get('/dashboard',function(req,res){
                req.redirect('/login');
            }
            else {
-               res.locals.user = user;
-               res.render('index.html')
+            Event.find({}, function (err, events) {
+                    if(events) {
+                        res.locals.user = user;
+                        res.render('index.jade', { events : events });    
+                    }
+                    else {
+
+                        res.render('index.jade', { events : ['null', 'null2'] });
+                    }
+                });  
            }
 
        })

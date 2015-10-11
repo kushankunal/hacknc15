@@ -1,0 +1,25 @@
+doctype html
+html
+  head(lang='en')
+    script.
+      alert(events)
+    meta(charset='UTF-8')
+    title TeamUp
+    // Latest compiled and minified CSS
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css')
+  body
+    .container
+      .jumbotron
+        h3 Let's TeamUP
+    .eventlist
+        ul
+          li
+            #{events.name}
+
+    // Button
+    .col-md-offset-3.col-md-9
+      button#btn-signup.btn.btn-info(type='submit', onclick="window.location.href='createEventForm'")
+        i.icon-hand-right
+        | &nbsp Create Event
+      span(style='margin-left:8px;')
+
