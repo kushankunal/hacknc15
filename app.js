@@ -16,7 +16,6 @@ var User = mongoose.model('User', new Schema({
     lastName: String,
     email: {type: String, unique: true},
     password: String,
-    aboutMe: String
 }));
 
 var Event = mongoose.model('Event', new Schema({
@@ -27,7 +26,13 @@ var Event = mongoose.model('Event', new Schema({
 	date: Date
 }));
 
-
+var EventDetails = mongoose.model('EventDetails', new Schema({
+	eventId: String,
+	userId: String,
+	userName: String,
+	aboutMe: String,
+	interested: [String]
+}));
 
 app.engine('html', require('ejs').renderFile);
 //Middleware
