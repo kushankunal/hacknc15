@@ -55,8 +55,7 @@ app.get('/register',function(req, res){
 
 app.get('/eventDetails',function(req,res){
     var id = req.query.eventId;
-    var userid = req.session.user;
-    console.log(userid);
+    var userid = req.session.user._id;
 
 });
 
