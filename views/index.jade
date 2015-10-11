@@ -13,8 +13,8 @@ html
         h3 Let's TeamUP
     .eventlist
         ul
-          li
-            #{events.name}
+          each val in events
+            li #{val.name}
 
     // Button
     .col-md-offset-3.col-md-9
