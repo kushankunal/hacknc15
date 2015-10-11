@@ -53,6 +53,12 @@ app.get('/register',function(req, res){
     console.log("entered register")
 });
 
+app.get('/eventDetails',function(req,res){
+    var id = req.query.eventId;
+    var userid = req.session.user;
+    console.log(userid);
+
+});
 
 app.post('/createEvent',function(req, res){
     var event = new Event({
@@ -70,8 +76,8 @@ app.post('/createEvent',function(req, res){
             console.log("Saved!");
             Event.find({}, function (err, events) {
                 console.log(events);
-                res.render('index.jade', { events : events });    
-            });  
+                res.render('index.jade', { events : events });
+            });
         }
     });
 });
@@ -87,35 +93,35 @@ app.get('/dashboard',function(req,res){
        User.findOne({email: req.session.user.email}, function(err, user){
            if (!user){
                req.session.reset();
-               req.redirect('/login');
+               res.render('signin.jade');
            }
            else {
             Event.find({}, function (err, events) {
                     if(events) {
                         res.locals.user = user;
-                        res.render('index.jade', { events : events });    
+                        res.render('index.jade', { events : events });
                     }
                     else {
 
                         res.render('index.jade', { events : ['null', 'null2'] });
                     }
-                });  
+                });
            }
 
        })
    }
     else{
-       res.redirect('/login');
+               res.render('signin.jade');
    }
 //Session set when user Request our app via URL
     //console.log(sess);
 
 })
 
-app.get('/login',function(req,res){
+app.post('/login',function(req,res){
     console.log("Entered login get"+ req.body.username);
 	if(req.body.username){
-		
+
 		User.findOne({email: req.body.username}, function(err, user){
 			console.log("findOne callback"+ user);
 			if(!user){
