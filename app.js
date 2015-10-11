@@ -55,7 +55,7 @@ app.get('/register',function(req, res){
 
 
 app.post('/createEvent',function(req, res){
-    var event = new User({
+    var event = new Event({
         name: req.body.name,
         location : req.body.location,
         teamSize : req.body.teamSize,
@@ -67,9 +67,9 @@ app.post('/createEvent',function(req, res){
             res.redirect('createEventForm');
         }
         else {
-            consloe.log("Saved!");
+            console.log("Saved!");
             Event.find({}, function (err, events) {
-                res.locals.user = user;
+                console.log(events);
                 res.render('index.jade', { events : events });    
             });  
         }
